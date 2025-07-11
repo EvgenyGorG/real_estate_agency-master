@@ -84,11 +84,18 @@ class Complaint(models.Model):
 
 
 class Owner(models.Model):
-    name = models.CharField('ФИО владельца', max_length=100)
-    phone_number = models.CharField('Номер владельца', max_length=20)
+    name = models.CharField(
+        'ФИО владельца', max_length=100,
+        db_index=True
+    )
+    phone_number = models.CharField(
+        'Номер владельца', max_length=20,
+        db_index=True
+    )
     pure_phone_number = PhoneNumberField(
         region='RU', blank=True,
-        verbose_name='Нормализованный номер владельца'
+        verbose_name='Нормализованный номер владельца',
+        db_index=True
     )
     flats = models.ManyToManyField(
         Flat, related_name='owners',
