@@ -9,7 +9,7 @@ def fill_owners_pure_phone_fields(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     flats_to_update = []
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         if flat.owners_phonenumber:
             try:
                 phone_number = phonenumbers.parse(flat.owners_phonenumber, region='RU')
